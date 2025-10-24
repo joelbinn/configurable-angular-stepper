@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, effect, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { StepperStateService } from '../services/stepper-state.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Exempel-komponent för personlig information
@@ -44,10 +46,30 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class PersonalInfoComponent {
   private fb = inject(FormBuilder);
+  private stateService = inject(StepperStateService);
 
   form = this.fb.nonNullable.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
   });
+
+  constructor() {
+    // Ladda befintlig data från state när komponenten skapas
+    effect(() => {
+      const existingData = this.stateService.personalInfo();
+      if (existingData) {
+        this.form.patchValue(existingData, { emitEvent: false });
+      }
+    });
+
+    // Spara ändringar till state när formuläret ändras
+    this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
+      this.stateService.setStepData('personal-info', {
+        firstName: value.firstName || '',
+        lastName: value.lastName || '',
+        email: value.email || '',
+      });
+    });
+  }
 }
