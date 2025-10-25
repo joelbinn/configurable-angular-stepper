@@ -1,19 +1,19 @@
-interface OptionalApi<T> {
+export interface OptionalApi<T> {
   get(): T
   isEmpty: boolean;
 }
 
-interface Empty<T> extends OptionalApi<T> {
+export interface Empty<T> extends OptionalApi<T> {
   readonly type: 'Empty'
 }
 
-interface Valid<T> extends OptionalApi<T> {
+export interface Valid<T> extends OptionalApi<T> {
   readonly type: 'Valid'
 }
 
-type Optional<T> = Empty<T> | Valid<T>
+export type Optional<T> = Empty<T> | Valid<T>
 
-function optionalOf<T>(value: T|undefined|null): Optional<T> {
+export function optionalOf<T>(value: T|undefined|null): Optional<T> {
   return value != null
     ? {
       type: 'Valid',
