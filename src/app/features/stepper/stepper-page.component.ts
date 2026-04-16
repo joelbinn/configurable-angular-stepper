@@ -1,7 +1,6 @@
-import { Component, signal, OnInit, effect } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { HorizontalMainStepperComponent } from './components/horizontal-main-stepper/horizontal-main-stepper.component'
+import { Component, effect, OnInit, signal } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { MatButtonModule } from '@angular/material/button'
 import { IStepConfig } from './models/step-config.model'
 import { ComponentRegistryService } from './services/component-registry.service'
 import { IStepperDataModel, StepperStateService } from './services/stepper-state.service'
@@ -9,10 +8,11 @@ import { PersonalInfoComponent } from './example-components/personal-info.compon
 import { AddressInfoComponent } from './example-components/address-info.component'
 import { PaymentInfoComponent } from './example-components/payment-info.component'
 import { ReviewComponent } from './example-components/review.component'
+import { MainStepperComponent } from './components/horizontal-main-stepper/main-stepper.component'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HorizontalMainStepperComponent, MatButtonModule, HorizontalMainStepperComponent],
+  imports: [RouterOutlet, MatButtonModule, MainStepperComponent],
   template: `
     <div style="padding: 24px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
@@ -43,7 +43,7 @@ import { ReviewComponent } from './example-components/review.component'
         </div>
       </div>
 
-      <app-horizontal-main-stepper [config]="stepperConfig()" [linear]="false" />
+      <app-main-stepper [config]="stepperConfig()" [linear]="false" />
     </div>
 
     <router-outlet />

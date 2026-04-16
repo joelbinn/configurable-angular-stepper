@@ -9,10 +9,10 @@ import { VerticalSubStepperComponent } from '../vertical-sub-stepper/vertical-su
  * Varje steg innehåller en vertikal sub-stepper med substeg.
  */
 @Component({
-  selector: 'app-horizontal-main-stepper',
+  selector: 'app-main-stepper',
   imports: [MatStepperModule, MatButtonModule, VerticalSubStepperComponent],
   template: `
-    <mat-stepper orientation="horizontal" [linear]="linear()">
+    <mat-stepper orientation="vertical" [linear]="linear()">
       @for (step of config().steps; track $index) {
         <mat-step [label]="step.title">
           <app-vertical-sub-stepper [subSteps]="step.subSteps" [linear]="linear()" />
@@ -38,7 +38,7 @@ import { VerticalSubStepperComponent } from '../vertical-sub-stepper/vertical-su
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HorizontalMainStepperComponent {
+export class MainStepperComponent {
   /** Konfiguration för stepper-hierarkin */
   config = input.required<IStepConfig>();
 
