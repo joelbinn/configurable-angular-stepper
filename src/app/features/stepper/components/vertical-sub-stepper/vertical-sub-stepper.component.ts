@@ -1,16 +1,17 @@
 import {
-  Component,
-  input,
-  ChangeDetectionStrategy,
-  ViewContainerRef,
-  viewChildren,
   AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
   signal,
-} from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonModule } from '@angular/material/button';
-import { ISubStep } from '../../models/step-config.model';
-import { ComponentRegistryService } from '../../services/component-registry.service';
+  viewChildren,
+  ViewContainerRef,
+} from '@angular/core'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatButtonModule } from '@angular/material/button'
+import { ISubStep } from '../../models/step-config.model'
+import { ComponentRegistryService } from '../../services/component-registry.service'
 
 /**
  * Vertikal sub-stepper som visar substeg för ett huvudsteg.
@@ -41,6 +42,8 @@ import { ComponentRegistryService } from '../../services/component-registry.serv
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerticalSubStepperComponent implements AfterViewInit {
+  private componentRegistry = inject(ComponentRegistryService)
+
   /** Lista av substeg att visa */
   subSteps = input.required<ISubStep[]>();
 
@@ -51,8 +54,6 @@ export class VerticalSubStepperComponent implements AfterViewInit {
   containers = viewChildren<unknown, ViewContainerRef>('container', { read: ViewContainerRef });
 
   private componentsLoaded = signal(false);
-
-  constructor(private componentRegistry: ComponentRegistryService) {}
 
   ngAfterViewInit(): void {
     // Ladda alla komponenter efter att vyn har initierats

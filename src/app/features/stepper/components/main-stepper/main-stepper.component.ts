@@ -1,8 +1,8 @@
-import { Component, input, ChangeDetectionStrategy } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonModule } from '@angular/material/button';
-import { IStepConfig } from '../../models/step-config.model';
-import { VerticalSubStepperComponent } from '../vertical-sub-stepper/vertical-sub-stepper.component';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatButtonModule } from '@angular/material/button'
+import { IStepConfig } from '../../models/step-config.model'
+import { VerticalSubStepperComponent } from '../vertical-sub-stepper/vertical-sub-stepper.component'
 
 /**
  * Horisontell huvudstepper som visar högsta nivån av steg.

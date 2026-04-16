@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, inject, effect, OnDestroy } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { StepperStateService } from '../services/stepper-state.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { StepperStateService } from '../services/stepper-state.service'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 /**
  * Exempel-komponent för personlig information

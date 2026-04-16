@@ -1,4 +1,4 @@
-import { Type } from '@angular/core';
+import { Type } from '@angular/core'
 
 /**
  * Konfiguration för substeg inom ett huvudsteg
@@ -33,6 +33,4 @@ export interface IStepConfig {
 /**
  * Registry-mapping mellan componentId och faktisk komponent
  */
-export interface IComponentRegistry {
-  [componentId: string]: Type<unknown>;
-}
+export type IComponentRegistry = Record<string, Type<unknown>>;

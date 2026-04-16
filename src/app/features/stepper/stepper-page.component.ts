@@ -1,4 +1,4 @@
-import { Component, effect, OnInit, signal } from '@angular/core'
+import { Component, effect, inject, OnInit, signal } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { MatButtonModule } from '@angular/material/button'
 import { IStepConfig } from './models/step-config.model'
@@ -8,7 +8,7 @@ import { PersonalInfoComponent } from './example-components/personal-info.compon
 import { AddressInfoComponent } from './example-components/address-info.component'
 import { PaymentInfoComponent } from './example-components/payment-info.component'
 import { ReviewComponent } from './example-components/review.component'
-import { MainStepperComponent } from './components/horizontal-main-stepper/main-stepper.component'
+import { MainStepperComponent } from './components/main-stepper/main-stepper.component'
 
 @Component({
   selector: 'app-root',
@@ -51,6 +51,9 @@ import { MainStepperComponent } from './components/horizontal-main-stepper/main-
   styles: ``,
 })
 export class StepperPage implements OnInit {
+  private componentRegistry = inject(ComponentRegistryService)
+  private stepperState = inject(StepperStateService)
+
   protected readonly title = signal('angular20-material-playground');
 
   protected readonly stepperConfig = signal<IStepConfig>({
@@ -84,11 +87,7 @@ export class StepperPage implements OnInit {
     ],
   });
 
-  constructor(
-    private componentRegistry: ComponentRegistryService,
-    private stepperState: StepperStateService
-  ) {
-    // Effect för att logga state-ändringar i konsolen
+  constructor() {
     effect(() => {
       const currentState = this.stepperState.data();
       console.log('📊 Stepper State Updated:', currentState);
